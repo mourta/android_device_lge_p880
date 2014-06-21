@@ -17,4 +17,7 @@
     
     <!-- Volume Rocker Wake -->
     <bool name="config_show_volumeRockerWake">true</bool>
+    
+    <!-- LED Flash -->
+    <bool name="has_led_flash">true</bool>
 </resources>
