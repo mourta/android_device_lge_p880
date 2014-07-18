@@ -15,14 +15,9 @@ TARGET_CPU_VARIANT := cortex-a9
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := $(TARGET_CPU_VARIANT)
 TARGET_CPU_SMP := true
-TARGET_GCC_VERSION_EXP := 4.7
 ARCH_ARM_HAVE_TLS_REGISTER := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINE := true
 ARCH_ARM_USE_NON_NEON_MEMCPY := true
-
-# Optimization build flags
-TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
 BOARD_KERNEL_CMDLINE := 
 BOARD_KERNEL_BASE := 0x10000000
@@ -39,8 +34,11 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RECOVERY_PRE_COMMAND := "/system/bin/setup-recovery"
 
 # Try to build the kernel
-TARGET_KERNEL_SOURCE := kernel/lge/x3
-TARGET_KERNEL_CONFIG := cyanogenmod_x3_defconfig
+#TARGET_KERNEL_SOURCE := kernel/lge/x3
+#TARGET_KERNEL_CONFIG := liquid_x3_defconfig
+#TARGET_GCC_VERSION_ARM := 4.7-linaro
+TARGET_GCC_VERSION_AND := 4.8-sm
+TARGET_PREBUILT_KERNEL := device/lge/p880/kernel
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
@@ -48,22 +46,12 @@ TARGET_RECOVERY_FSTAB = device/lge/p880/rootdir/fstab.x3
 RECOVERY_FSTAB_VERSION = 2
 TARGET_USERIMAGES_USE_EXT4 := true
 
-# F2FS filesystem
-TARGET_USERIMAGES_USE_F2FS := true
-
 TARGET_SPECIFIC_HEADER_PATH := device/lge/p880/include
 
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 BOARD_USE_SKIA_LCDTEXT := true
 BOARD_EGL_CFG := device/lge/p880/configs/egl.cfg
 USE_OPENGL_RENDERER := true
-
-# Old blobs support
-#BOARD_EGL_NEEDS_LEGACY_FB := true # either this or SKIP_FIRST_DEQUEUE is needed (preferably the latter)
-#BOARD_USE_MHEAP_SCREENSHOT := true
-#BOARD_EGL_SKIP_FIRST_DEQUEUE := true
-#BOARD_NEEDS_OLD_HWC_API := true
-#BOARD_EGL_WORKAROUND_BUG_10194508 := true
 
 # Enable WEBGL in WebKit
 ENABLE_WEBGL := true
@@ -122,9 +110,11 @@ BOARD_SEPOLICY_UNION += \
 
 endif
 
-#TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
+TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
 BOARD_HARDWARE_CLASS := device/lge/p880/cmhw/
+
+
 
 # TWRP
 DEVICE_RESOLUTION := 720x1280

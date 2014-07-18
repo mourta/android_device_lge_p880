@@ -57,7 +57,6 @@ PRODUCT_COPY_FILES += \
 ## Audio config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf \
     $(LOCAL_PATH)/configs/asound.conf:system/etc/asound.conf \
     $(LOCAL_PATH)/configs/nvaudio_conf.xml:system/etc/nvaudio_conf.xml \
     $(LOCAL_PATH)/configs/alsa/alsa.conf:system/usr/share/alsa/alsa.conf \
@@ -79,6 +78,18 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/alsa/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf
 
 $(call inherit-product, build/target/product/full.mk)
+
+# Kernel - prebuilt for now
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+	LOCAL_KERNEL := device/lge/p880/kernel
+else
+	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel
+
+
 
 # Permission files
 PRODUCT_COPY_FILES += \
@@ -127,7 +138,7 @@ PRODUCT_PACKAGES += \
     nfc.x3
 
 # F2FS filesystem
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     mkfs.f2fs \
     fsck.f2fs \
     fibmap.f2fs \
